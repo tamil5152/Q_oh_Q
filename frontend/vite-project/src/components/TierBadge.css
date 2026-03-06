@@ -1,0 +1,183 @@
+.tier-badge-container {
+    background: #1a2235;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.tier-badge-container:hover {
+    transform: translateY(-2px);
+}
+
+/* Tier specific glows */
+.tier-badge-container.tier-bronze {
+    box-shadow: 0 4px 20px rgba(205, 127, 50, 0.1);
+    border-color: rgba(205, 127, 50, 0.2);
+}
+
+.tier-badge-container.tier-silver {
+    box-shadow: 0 4px 20px rgba(192, 192, 192, 0.1);
+    border-color: rgba(192, 192, 192, 0.2);
+}
+
+.tier-badge-container.tier-gold {
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.tier-badge-container.tier-platinum {
+    box-shadow: 0 4px 20px rgba(229, 228, 226, 0.15);
+    border-color: rgba(229, 228, 226, 0.4);
+}
+
+.tier-badge-container.tier-master-glacier {
+    box-shadow: 0 4px 30px rgba(0, 212, 255, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
+    background: linear-gradient(135deg, #1a2235 0%, rgba(0, 212, 255, 0.1) 100%);
+}
+
+/* Header & Icon */
+.tier-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tier-icon {
+    font-size: 3rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.tier-master-glacier .tier-icon {
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.8));
+    animation: glacier-pulse 2s infinite alternate;
+}
+
+@keyframes glacier-pulse {
+    from {
+        filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        transform: scale(1);
+    }
+
+    to {
+        filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.9));
+        transform: scale(1.05);
+    }
+}
+
+.tier-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.tier-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6b7394;
+    font-weight: 600;
+}
+
+.tier-name {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Specific text colors */
+.tier-bronze .tier-name {
+    color: #cd7f32;
+}
+
+.tier-silver .tier-name {
+    color: #c0c0c0;
+}
+
+.tier-gold .tier-name {
+    color: #ffd700;
+}
+
+.tier-platinum .tier-name {
+    color: #e5e4e2;
+}
+
+.tier-master-glacier .tier-name {
+    background: linear-gradient(90deg, #00d4ff, #fff, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Progress bar section */
+.tier-progress-section {
+    width: 100%;
+}
+
+.tier-score-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #e8eaf2;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.tier-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #0f1420;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.tier-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Progress bar colors based on tier */
+.tier-bronze .tier-progress-fill {
+    background: linear-gradient(90deg, #8c5a24, #cd7f32);
+}
+
+.tier-silver .tier-progress-fill {
+    background: linear-gradient(90deg, #808080, #c0c0c0);
+}
+
+.tier-gold .tier-progress-fill {
+    background: linear-gradient(90deg, #b8860b, #ffd700);
+}
+
+.tier-platinum .tier-progress-fill {
+    background: linear-gradient(90deg, #a09f9c, #e5e4e2);
+}
+
+.tier-master-glacier .tier-progress-fill {
+    background: linear-gradient(90deg, #005c99, #00d4ff, #fff);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.tier-next-hint {
+    margin: 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #6b7394;
+}

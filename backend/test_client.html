@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>AI Quiz Test</h2>
+
+<div id="status"></div>
+<div id="question"></div>
+<input id="answer" placeholder="Enter option text">
+<button onclick="sendAnswer()">Submit</button>
+
+<h3 id="scores"></h3>
+
+<script>
+
+let ws = new WebSocket("ws://127.0.0.1:8000/ws");
+
+let startTime = 0;
+let correctAnswer = "";
+
+ws.onopen = () => {
+    document.getElementById("status").innerText = "Connected to server";
+};
+
+ws.onmessage = (event) => {
+
+    let msg = JSON.parse(event.data);
+
+    console.log(msg);
+
+    if(msg.type === "info"){
+        document.getElementById("status").innerText = msg.message;
+    }
+
+    if(msg.type === "question"){
+
+        let q = msg.data;
+
+        correctAnswer = q.answer;
+
+        document.getElementById("question").innerHTML =
+        "<b>"+q.question+"</b><br>"+q.options.join("<br>");
+
+        startTime = Date.now();
+    }
+
+    if(msg.type === "score_update"){
+        document.getElementById("scores").innerText =
+        "Scores: " + JSON.stringify(msg.scores);
+    }
+
+    if(msg.type === "game_over"){
+        document.getElementById("scores").innerText =
+        "Game Over: " + JSON.stringify(msg.scores);
+    }
+};
+
+function sendAnswer(){
+
+    let ans = document.getElementById("answer").value;
+
+    let responseTime = (Date.now() - startTime)/1000;
+
+    ws.send(JSON.stringify({
+        answer: ans,
+        time: responseTime,
+        correct: correctAnswer
+    }))
+}
+
+</script>
+
+</body>
+</html>
